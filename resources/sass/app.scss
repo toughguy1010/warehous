@@ -220,6 +220,7 @@ body {
 .sub-menu{
     padding-left: 22px;
     display: none;
+    margin-top: 10px;
 }
 .sub-menu-item{
     list-style-type: none ;
@@ -232,4 +233,32 @@ body {
     &:hover{
         color: #fff !important;
     }
+}
+.cs-form{
+    background-color: #fff;
+    max-width: 550px;
+    padding: 30px;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+.required{
+    color: red;
+}
+.alert {
+    position: fixed;
+    right: 0;
+    ul{
+        margin-bottom: 0 !important;
+        padding-left: 0 !important;
+        li{
+            list-style-type: none;
+        }
+    }
+}
+.cs-table td, .cs-table th{
+    text-align: center;
+    vertical-align: baseline;
+}
+.cs-table{
+    margin-top: 20px;
 }
