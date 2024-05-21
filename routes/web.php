@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +15,7 @@ use App\Http\Controllers\SupplierController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,18 +28,25 @@ Route::middleware(['auth'])->group(function () {
     // Unit
     Route::get('/unit/create/{id?}', [App\Http\Controllers\UnitController::class, 'upsert'])->name('unit.create')->middleware('admin');
     Route::get('/unit/update/{id?}', [App\Http\Controllers\UnitController::class, 'upsert'])->name('unit.update')->middleware('admin');
-    Route::post('/unit/upsert/store/{id?}',[App\Http\Controllers\UnitController::class, 'upsertStore'])->name('unit.upsert.store')->middleware('admin');
-    Route::get('/unit/upsert/index',[App\Http\Controllers\UnitController::class, 'index'])->name('unit.index')->middleware('admin');
-    Route::delete('/unit/upsert/delete/{id}',[App\Http\Controllers\UnitController::class, 'delete'])->name('unit.delete')->middleware('admin');
+    Route::post('/unit/upsert/store/{id?}', [App\Http\Controllers\UnitController::class, 'upsertStore'])->name('unit.upsert.store')->middleware('admin');
+    Route::get('/unit/upsert/index', [App\Http\Controllers\UnitController::class, 'index'])->name('unit.index')->middleware('admin');
+    Route::delete('/unit/upsert/delete/{id}', [App\Http\Controllers\UnitController::class, 'delete'])->name('unit.delete')->middleware('admin');
     // Unit
 
     // Suppeliers
     Route::get('/supplier/create/{id?}', [App\Http\Controllers\SupplierController::class, 'upsert'])->name('supplier.create')->middleware('admin');
     Route::get('/supplier/update/{id?}', [App\Http\Controllers\SupplierController::class, 'upsert'])->name('supplier.update')->middleware('admin');
-    Route::post('/supplier/upsert/store/{id?}',[App\Http\Controllers\SupplierController::class, 'upsertStore'])->name('supplier.upsert.store')->middleware('admin');
-    Route::get('/supplier/upsert/index',[App\Http\Controllers\SupplierController::class, 'index'])->name('supplier.index')->middleware('admin');
-    Route::delete('/supplier/upsert/delete/{id}',[App\Http\Controllers\SupplierController::class, 'delete'])->name('supplier.delete')->middleware('admin');
+    Route::post('/supplier/upsert/store/{id?}', [App\Http\Controllers\SupplierController::class, 'upsertStore'])->name('supplier.upsert.store')->middleware('admin');
+    Route::get('/supplier/upsert/index', [App\Http\Controllers\SupplierController::class, 'index'])->name('supplier.index')->middleware('admin');
+    Route::delete('/supplier/upsert/delete/{id}', [App\Http\Controllers\SupplierController::class, 'delete'])->name('supplier.delete')->middleware('admin');
 
     // Suppeliers
 
+    // Customer
+    Route::get('/customer/create/{id?}', [App\Http\Controllers\CustomerController::class, 'upsert'])->name('customer.create')->middleware('admin');
+    Route::get('/customer/update/{id?}', [App\Http\Controllers\CustomerController::class, 'upsert'])->name('customer.update')->middleware('admin');
+    Route::post('/customer/upsert/store/{id?}', [App\Http\Controllers\CustomerController::class, 'upsertStore'])->name('customer.upsert.store')->middleware('admin');
+    Route::get('/customer/upsert/index', [App\Http\Controllers\CustomerController::class, 'index'])->name('customer.index')->middleware('admin');
+    Route::delete('/customer/upsert/delete/{id}', [App\Http\Controllers\CustomerController::class, 'delete'])->name('customer.delete')->middleware('admin');
+    // Customer
 });

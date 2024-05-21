@@ -6,15 +6,15 @@
     <table class="table cs-table ">
         <thead>
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">STT</th>
                 <th scope="col">Tên đơn vị</th>
                 <th scope="col">Thao tác</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($units as $unit)
+            @foreach ($units as $key => $unit)
                 <tr>
-                    <td>{{ $unit->id }}</td>
+                    <td>{{ $key + 1 }}</td>
                     <td>{{ $unit->name }}</td>
                     <td>
                         <div class="d-flex justify-content-center" style="gap: 10px">

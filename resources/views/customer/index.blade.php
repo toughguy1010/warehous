@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
     <h3>
-        Danh sách nhà cung cấp
+        Danh sách khách hàng
     </h3>
     <table class="table cs-table ">
         <thead>
             <tr>
                 <th scope="col">STT</th>
-                <th scope="col">Tên nhà cung cấp</th>
+                <th scope="col">Tên khách hàng</th>
                 <th scope="col">Email</th>
                 <th scope="col">Số điện thoại</th>
                 <th scope="col">Địa chỉ</th>
@@ -15,24 +15,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($suppliers as $key => $supplier)
+            @foreach ($customers as $key => $customer)
                 <tr>
                     <td>{{ $key + 1 }}</td>
-                    <td>{{ $supplier->name }}</td>
-                    <td>{{ $supplier->email }}</td>
-                    <td>{{ $supplier->phone }}</td>
+                    <td>{{ $customer->name }}</td>
+                    <td>{{ $customer->email }}</td>
+                    <td>{{ $customer->phone }}</td>
                     <td>
                         <p class="short-text">
-                            {{ $supplier->address }}
+                            {{ $customer->address }}
                         </p>
                     </td>
                     <td>
                         <div class="d-flex justify-content-center" style="gap: 10px">
-                            <a href="{{ route('supplier.update', $supplier->id) }}" class="btn btn-primary"> Sửa </a>
-                            <form action="{{ route('supplier.delete', $supplier->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('customer.update', $customer->id) }}" class="btn btn-primary"> Sửa </a>
+                            <form action="{{ route('customer.delete', $customer->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa nhà cung cấp này không?');">Xóa</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa khách hàng này không?');">Xóa</button>
                             </form>
                         </div>
                     </td>
@@ -40,5 +40,5 @@
             @endforeach
         </tbody>
     </table>
-    {{ $suppliers->links('vendor.pagination.bootstrap-5') }}
+    {{ $customers->links('vendor.pagination.bootstrap-5') }}
 @endsection
