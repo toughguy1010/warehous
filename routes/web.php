@@ -49,4 +49,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customer/upsert/index', [App\Http\Controllers\CustomerController::class, 'index'])->name('customer.index')->middleware('admin');
     Route::delete('/customer/upsert/delete/{id}', [App\Http\Controllers\CustomerController::class, 'delete'])->name('customer.delete')->middleware('admin');
     // Customer
+    // Product
+    
+    Route::get('/product/index', [App\Http\Controllers\ProductsController::class, 'index'])->name('product.index')->middleware('admin');
+    
+    // Product
 });

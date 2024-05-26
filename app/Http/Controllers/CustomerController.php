@@ -40,7 +40,8 @@ class CustomerController extends Controller
                 return redirect()->route('customer.index');
             }
         } catch (\Exception $e) {
-            session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
+            dd($e);
+                        session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
             return back();
         }
     }
