@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
-
+use App\Models\Supplier;
+use App\Models\Unit;
 class ProductsController extends Controller
 {
     /**
@@ -17,12 +18,18 @@ class ProductsController extends Controller
         return view('product.index', $data);
     }
     public function upsert($id = null){
+        
         if($id !== null){
             $products = Products::findOrFail($id);
         }else{
             $products = null;
         }
+        $suppliers = Supplier::all();
+        $units = Unit::all();
+
         $data['product'] = $products;
+        $data['suppliers'] = $suppliers;
+        $data['units'] = $units;
         return view('product.upsert', $data);
     }
     public function upsertStore(Request $request, $id = null){

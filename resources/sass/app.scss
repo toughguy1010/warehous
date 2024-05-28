@@ -180,6 +180,13 @@ body {
 .menu-dropdown-item {
     list-style-type: none;
 }
+.menu-dropdown-item button{
+    padding: 0;
+    justify-content: flex-end;
+    width: 100%;
+    background: unset;
+    border: unset;
+}
 .menu-dropdown::before {
     position: absolute;
     content: "";
