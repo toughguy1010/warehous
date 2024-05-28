@@ -16,52 +16,53 @@ class ProductsController extends Controller
         $data['product'] = $products;
         return view('product.index', $data);
     }
+    public function upsert($id = null){
+        if($id !== null){
+            $products = Products::findOrFail($id);
+        }else{
+            $products = null;
+        }
+        $data['product'] = $products;
+        return view('product.upsert', $data);
+    }
+    public function upsertStore(Request $request, $id = null){
+        $request->validate([
+            'name' => 'required|string|max:255',
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        ]);
+        try {
+            if ($id !== null) {
+                $products = Products::findOrFail($id);
+            } else {
+                $products = new Products();
+            }
+            $products->name = $request->name;
+            $products->description = $request->description;
+            $products->price = $request->price;
+            if ($products->save()) {
+                session()->flash('success', $id ? 'Cập nhật thông tin sản phẩm thành công' : 'Thêm sản phẩm thành công');
+                return redirect()->route('product.index');
+            }
+        } catch (\Exception $e) {
+            dd($e);
+                        session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
+            return back();
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function delete($id)
     {
-        //
+        try {
+            $products = Products::findOrFail($id);
+            $products->delete();
+            // Store a success message in the session
+            session()->flash('success', 'Xóa khách hàng thành công');
+            return redirect()->route('product.index');
+        } catch (\Exception $e) {
+            // Store an error message in the session
+            session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
+            return redirect()->route('product.index');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

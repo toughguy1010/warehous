@@ -52,6 +52,9 @@ Route::middleware(['auth'])->group(function () {
     // Product
     
     Route::get('/product/index', [App\Http\Controllers\ProductsController::class, 'index'])->name('product.index')->middleware('admin');
-    
+    Route::get('/product/create/{id?}', [App\Http\Controllers\ProductsController::class, 'upsert'])->name('product.create')->middleware('admin');
+    Route::get('/product/update/{id?}', [App\Http\Controllers\ProductsController::class, 'upsert'])->name('product.update')->middleware('admin');
+    Route::post('/product/upsert/store/{id?}', [App\Http\Controllers\ProductsController::class, 'upsertStore'])->name('product.upsert.store')->middleware('admin');
+    Route::delete('/product/upsert/delete/{id}', [App\Http\Controllers\ProductsController::class, 'delete'])->name('product.delete')->middleware('admin');
     // Product
 });

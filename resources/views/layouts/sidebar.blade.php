@@ -90,7 +90,9 @@
 
             </div>
             <ul class="sub-menu">
-               
+            <li class="sub-menu-item">
+                    <a href="{{ route('product.create') }}" class="sub-menu-link">Thêm sản phẩm</a>
+                </li>
                 <li class="sub-menu-item">
                     <a href="{{ route('product.index') }}" class="sub-menu-link">Danh sách sản phẩm</a>
                 </li>
