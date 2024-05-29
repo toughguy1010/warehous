@@ -66,9 +66,21 @@
             </div>
             <div class=" col-6">
                 <label for="formFile" class="form-label">Ảnh đại diện</label>
-                <input class="form-control" type="file" id="formFile" name="avatar">
-                <img id="preview" src="#" alt="Ảnh đại diện" style="display: none; max-width: 500px; max-height: 500px;">
+                <input class="form-control" type="file" id="upload" name="file" data-url="{{ route('upload.services') }}">
+                @if ($product)
+                <div id="preview">
+                    <a href="">
+                        <img src="{{ $product->avatar }}" alt="">
+                    </a>
+                </div>
+                <input type="hidden" id="file" name="avatar" value="{{ $product->avatar }}">
+                @else
+                <div id="preview">
 
+                </div>
+                <input type="hidden" id="file" name="avatar">
+                @endif
+                
             </div>
         </div>
 

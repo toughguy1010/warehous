@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\UploadController;
+use App\Http\Services\UploadService;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,4 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/product/upsert/store/{id?}', [App\Http\Controllers\ProductsController::class, 'upsertStore'])->name('product.upsert.store')->middleware('admin');
     Route::delete('/product/upsert/delete/{id}', [App\Http\Controllers\ProductsController::class, 'delete'])->name('product.delete')->middleware('admin');
     // Product
+
+
+    // Upload
+    Route::post('upload/services',[App\Http\Controllers\UploadController::class, 'store'])->name('upload.services');
+
 });
