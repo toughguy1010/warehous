@@ -16,3 +16,16 @@ if (!function_exists('showImage')) {
 
     }
 }
+
+if (!function_exists('showPrice')) {
+    /**
+     * Flatten a multi-dimensional array into a single level.
+     *
+     * @param  array  $array
+     * @return array
+     */
+    function showPrice($price)
+    {
+        return number_format($price, 0, '.', ',') . ' VND';
+    }
+}

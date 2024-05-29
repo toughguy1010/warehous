@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <form class="cs-form" action="{{ route('product.upsert.store', ['id' => isset($product) ? $product->id : null]) }}"
-        method="post" style="max-width: 950px" enctype="">
+        method="post" style="max-width: 950px" enctype="multipart/form-data">
         @csrf
         <h3 class="form-title mb-4 text-center">
-            {{ isset($product) ? 'Cập nhật' : 'Thêm mới' }} Sẩn phẩm
+            {{ isset($product) ? 'Cập nhật' : 'Thêm mới' }} sản phẩm
         </h3>
         <div class="row mb-3">
             <div class=" col-6">
@@ -22,13 +22,13 @@
         <div class="row mb-3">
             <div class=" col-6">
                 <label for="nameproduct" class="form-label">Giá mua <span class="required">*</span></label>
-                <input type="text" class="form-control" name="name"
-                    value="{{ isset($product) ? $product->purchase_price : '' }}" placeholder="Nhập tên sản phẩm">
+                <input type="text" class="form-control" name="purchase_price"
+                    value="{{ isset($product) ? $product->purchase_price : '' }}" placeholder="Nhập giá mua">
             </div>
             <div class="col-6">
                 <label for="namecustomer" class="form-label">Giá bán <span class="required">*</span></label>
-                <input type="text" class="form-control" name="description"
-                    value="{{ isset($product) ? $product->selling_price : '' }}" placeholder="Nhập mô tả sản phẩm">
+                <input type="text" class="form-control" name="selling_price"
+                    value="{{ isset($product) ? $product->selling_price: '' }}" placeholder="Nhập giá bán">
             </div>
         </div>
         <div class="row mb-3">
@@ -45,7 +45,7 @@
                 </select>
             </div>
             <div class=" col-6">
-                <label for="nameproduct" class="form-label">Đơn vị </label>
+                <label for="nameproduct" class="form-label">Đơn vị <span class="required">*</span></label>
                 <select class="form-select" aria-label="Default select example" name="unit_id">
                     <option value="">--Chọn đơn vị---</option>
                     @foreach ($units as $unit)
@@ -60,7 +60,7 @@
 
         <div class="row mb-3">
             <div class="col-6">
-                <label for="namecustomer" class="form-label">Số lượng sản phẩm </label>
+                <label for="namecustomer" class="form-label">Số lượng sản phẩm <span class="required">*</span></label>
                 <input type="text" class="form-control" name="stock"
                     value="{{ isset($product) ? $product->stock : '' }}" placeholder="Nhập số lượng sản phẩm">
             </div>

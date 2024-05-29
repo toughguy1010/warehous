@@ -32,7 +32,7 @@ $(document).ready(function () {
                     $("#preview").html(
                         '<a href=" "><img src= " ' + response.url + ' " ></a>'
                     );
-                    $("$file").val(response.url);
+                    $("#file").val(response.url);
                 } else {
                     alert("Tải file thất bại");
                 }
