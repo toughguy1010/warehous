@@ -50,4 +50,21 @@ class User extends Authenticatable
     {
         return $this->type === 'employee';
     }
+    public function getTextType($type)
+    {
+        if ($type == 'employee') {
+            return 'Nhân viên';
+        } else {
+            return 'Quản trị viên';
+        }
+        return 'Chưa rõ chức vụ';
+    }
+
+    public function getTextStatus($status)
+    {
+        if ($status == 1) {
+            return 'Hoạt động';
+        }
+        return 'Dừng hoạt động';
+    }
 }

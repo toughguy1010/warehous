@@ -289,3 +289,24 @@ body {
     height: 70px;
     object-fit: cover;
 }
+
+.status-deactive {
+    padding: 8px;
+    background: #ff9b9b;
+    color: #fff;
+    border-radius: 13px;
+    width: 125px;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.status-active {
+    padding: 8px;
+    background: #91c594;
+    color: #fff;
+    border-radius: 13px;
+    width: 125px;
+    display: block;
+    margin: 0 auto;
+}

@@ -7,6 +7,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UploadController;
 use App\Http\Services\UploadService;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,9 +60,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/product/upsert/store/{id?}', [App\Http\Controllers\ProductsController::class, 'upsertStore'])->name('product.upsert.store')->middleware('admin');
     Route::delete('/product/upsert/delete/{id}', [App\Http\Controllers\ProductsController::class, 'delete'])->name('product.delete')->middleware('admin');
     // Product
+    // User
 
-
+    // User
+    Route::get('/user/index', [App\Http\Controllers\UserController::class, 'index'])->name('user.index')->middleware('admin');
+    Route::get('/user/create/{id?}', [App\Http\Controllers\UserController::class, 'upsert'])->name('user.create')->middleware('admin');
+    Route::get('/user/update/{id?}', [App\Http\Controllers\UserController::class, 'upsert'])->name('user.update')->middleware('admin');
+    Route::post('/user/upsert/store/{id?}', [App\Http\Controllers\UserController::class, 'upsertStore'])->name('user.upsert.store')->middleware('admin');
+    Route::delete('/user/upsert/delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('user.delete')->middleware('admin');
     // Upload
+
+    
     Route::post('upload/services',[App\Http\Controllers\UploadController::class, 'store'])->name('upload.services');
 
 });
