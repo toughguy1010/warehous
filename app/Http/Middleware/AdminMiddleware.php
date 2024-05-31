@@ -20,6 +20,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return abort(403, 'Unauthorized');
+        return redirect()->route('unauthorized');
     }
 }

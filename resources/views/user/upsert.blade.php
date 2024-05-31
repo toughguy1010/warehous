@@ -20,12 +20,17 @@
                 <input type="text" class="form-control" name="email" value="{{ isset($user) ? $user->email : '' }}"
                     placeholder="Nhập email">
             </div>
-            @if (!$user)
-                <div class="col-6">
+            <div class="col-6">
+                @if (!$user)
                     <label for="namecustomer" class="form-label">Mật khẩu <span class="required">*</span></label>
                     <input type="password" class="form-control" name="password" value="" placeholder="Nhập mật khẩu">
-                </div>
-            @endif
+                @else
+                <label for="namecustomer" class="form-label">Mật khẩu</label>
+                <input type="password" class="form-control" name="none" value="" placeholder="Không có quyền thay đổi mật khẩu" readonly>
+
+                @endif
+
+            </div>
         </div>
         <div class="row mb-3">
             <div class=" col-6">
@@ -35,14 +40,14 @@
             </div>
             <div class="col-6">
                 <label for="namecustomer" class="form-label">Địa chỉ </label>
-                <input type="text" class="form-control" name="address" value="" placeholder="Nhập địa chỉ">
+                <input type="text" class="form-control" name="address" value="{{ isset($user) ? $user->address : '' }}" placeholder="Nhập địa chỉ">
             </div>
         </div>
         <div class="row mb-3">
             <div class=" col-6">
                 <label for="nameuser" class="form-label">Trạng thái </label>
-                <select class="form-select" aria-label="Default select example" name="supplier_id">
-                    <option value="">--Chọn nhà Trạng thái---</option>
+                <select class="form-select" aria-label="Default select example" name="status">
+                    <option value="">--Chọn trạng thái---</option>
                     <option value="1" {{ isset($user) && $user->status === 1 ? 'selected' : '' }}> Hoạt động </option>
                     <option value="0" {{ isset($user) && $user->status === 0 ? 'selected' : '' }}> Dừng hoạt động
                     </option>
@@ -50,10 +55,12 @@
             </div>
             <div class=" col-6">
                 <label for="nameuser" class="form-label"> Chức vụ <span class="required">*</span></label>
-                <select class="form-select" aria-label="Default select example" name="unit_id">
+                <select class="form-select" aria-label="Default select example" name="type">
                     <option value="">---Chọn chức vụ---</option>
-                    <option value="admin" {{ isset($user) && $user->type === 'admin' ? 'selected' : '' }}> Quản trị viên </option>
-                    <option value="employee" {{ isset($user) && $user->type === 'employee' ? 'selected' : '' }}> Nhân viên </option>
+                    <option value="admin" {{ isset($user) && $user->type === 'admin' ? 'selected' : '' }}> Quản trị viên
+                    </option>
+                    <option value="employee" {{ isset($user) && $user->type === 'employee' ? 'selected' : '' }}> Nhân viên
+                    </option>
                 </select>
             </div>
         </div>
@@ -66,7 +73,7 @@
                 @if ($user)
                     <div id="preview">
                         <a href="">
-                            <img src="{{ $user->avatar }}" alt="">
+                            <img src="{{ showImage($user->avatar)  }}" alt="">
                         </a>
                     </div>
                     <input type="hidden" id="file" name="avatar" value="{{ $user->avatar }}">
