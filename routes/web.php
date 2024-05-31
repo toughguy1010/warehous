@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/product/update/{id?}', [ProductsController::class, 'upsert'])->name('product.update')->middleware('admin');
     Route::post('/product/upsert/store/{id?}', [ProductsController::class, 'upsertStore'])->name('product.upsert.store')->middleware('admin');
     Route::delete('/product/upsert/delete/{id}', [ProductsController::class, 'delete'])->name('product.delete')->middleware('admin');
+    Route::get('/get-product-detail/{id?}', [ProductsController::class, 'getProductDetail'])->name('product.get-product')->middleware('admin');
     // Product
 
     // User
@@ -73,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
     // User
 
     // Import Order
-    Route::get('/order/create/{id?}', [ImportOrderController::class, 'upsert'])->name('user.create')->middleware('admin');
+    Route::get('/order-import/create/{id?}', [ImportOrderController::class, 'create'])->name('import.create')->middleware('admin');
 
 
    

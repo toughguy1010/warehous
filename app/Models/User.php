@@ -67,4 +67,11 @@ class User extends Authenticatable
         }
         return 'Dừng hoạt động';
     }
+    public static function getEmployee()
+    {
+        $employees = self::where('type', 'employee')
+            ->where('status', 1)
+            ->get();
+        return $employees;
+    }
 }

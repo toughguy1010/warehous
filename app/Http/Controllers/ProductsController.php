@@ -18,7 +18,7 @@ class ProductsController extends Controller
         $data['products'] = $products;
         return view('product.index', $data);
     }
-    public function upsert($id = null)
+    public function upsert(Request $request, $id = null)
     {
 
         if ($id !== null) {
@@ -32,6 +32,9 @@ class ProductsController extends Controller
         $data['product'] = $products;
         $data['suppliers'] = $suppliers;
         $data['units'] = $units;
+        if ($request->ajax()) {
+            return view('order.import.modal', $data);
+        }
         return view('product.upsert', $data);
     }
     public function upsertStore(Request $request, $id = null)
@@ -58,6 +61,13 @@ class ProductsController extends Controller
             $product->stock = $request->stock;
             $product->avatar = $request->avatar;
             if ($product->save()) {
+                if ($request->ajax()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => $id ? 'Cập nhật thông tin hàng hóa thành công' : 'Thêm hàng hóa thành công',
+                        'product' => $product
+                    ]);
+                }
                 session()->flash('success', $id ? 'Cập nhật thông tin hàng hóa thành công' : 'Thêm hàng hóa thành công');
                 return redirect()->route('product.index');
             }
@@ -80,6 +90,29 @@ class ProductsController extends Controller
             // Store an error message in the session
             session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
             return redirect()->route('product.index');
+        }
+    }
+    public function getProductDetail(Request $request, $id)
+    {
+        $product = Products::find($id);
+
+        if ($product) {
+            // Kiểm tra xem có truyền thêm 'stock' không
+            $additional_stock = $request->input('stock', 0);
+            $stock =  $additional_stock;
+            $total = $product->purchase_price * $stock;
+            $response = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'avatar' => showImage($product->avatar), // Điều chỉnh đường dẫn ảnh
+                'stock' => $stock, // Cộng thêm stock nếu có
+                'purchase_price' => showPrice($product->purchase_price),
+                'total' => showPrice($total),
+            ];
+
+            return response()->json($response);
+        } else {
+            return response()->json(['error' => 'Product not found'], 404);
         }
     }
 }

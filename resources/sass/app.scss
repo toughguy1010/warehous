@@ -310,3 +310,15 @@ body {
     display: block;
     margin: 0 auto;
 }
+.item-product-order tr{
+    vertical-align: baseline;
+}
+.right-btn{
+    margin-left: auto;
+    width: fit-content;
+    display: block;
+}
+.modal-dialog{
+    width: 800px !important;
+    max-width: 800px !important;
+}
