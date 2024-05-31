@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
     <h3>
-        Sản phẩm
+        Hàng hóa
     </h3>
     <table class="table cs-table ">
         <thead>
             <tr>
                 <th scope="col">STT</th>
-                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Tên hàng hóa</th>
                 <th scope="col">Ảnh</th>
                 <th scope="col">Giá bán</th>
                 <th scope="col">Giá mua</th>
@@ -33,7 +33,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Bạn có muốn xóa sản phẩm này không?');">Xóa</button>
+                                    onclick="return confirm('Bạn có muốn xóa hàng hóa này không?');">Xóa</button>
                             </form>
                         </div>
                     </td>

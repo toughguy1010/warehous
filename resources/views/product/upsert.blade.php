@@ -4,18 +4,18 @@
         method="post" style="max-width: 950px" enctype="multipart/form-data">
         @csrf
         <h3 class="form-title mb-4 text-center">
-            {{ isset($product) ? 'Cập nhật' : 'Thêm mới' }} sản phẩm
+            {{ isset($product) ? 'Cập nhật' : 'Thêm mới' }} hàng hóa
         </h3>
         <div class="row mb-3">
             <div class=" col-6">
-                <label for="nameproduct" class="form-label">Tên sản phẩm <span class="required">*</span></label>
+                <label for="nameproduct" class="form-label">Tên hàng hóa <span class="required">*</span></label>
                 <input type="text" class="form-control" name="name"
-                    value="{{ isset($product) ? $product->name : '' }}" placeholder="Nhập tên sản phẩm">
+                    value="{{ isset($product) ? $product->name : '' }}" placeholder="Nhập tên hàng hóa">
             </div>
             <div class="col-6">
-                <label for="namecustomer" class="form-label">Mô tả sản phẩm </label>
+                <label for="namecustomer" class="form-label">Mô tả hàng hóa </label>
                 <input type="text" class="form-control" name="description"
-                    value="{{ isset($product) ? $product->description : '' }}" placeholder="Nhập mô tả sản phẩm">
+                    value="{{ isset($product) ? $product->description : '' }}" placeholder="Nhập mô tả hàng hóa">
             </div>
         </div>
 
@@ -60,9 +60,9 @@
 
         <div class="row mb-3">
             <div class="col-6">
-                <label for="namecustomer" class="form-label">Số lượng sản phẩm <span class="required">*</span></label>
+                <label for="namecustomer" class="form-label">Số lượng hàng hóa <span class="required">*</span></label>
                 <input type="text" class="form-control" name="stock"
-                    value="{{ isset($product) ? $product->stock : '' }}" placeholder="Nhập số lượng sản phẩm">
+                    value="{{ isset($product) ? $product->stock : '' }}" placeholder="Nhập số lượng hàng hóa">
             </div>
             <div class=" col-6">
                 <label for="formFile" class="form-label">Ảnh đại diện</label>

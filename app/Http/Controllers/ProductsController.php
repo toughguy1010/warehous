@@ -58,7 +58,7 @@ class ProductsController extends Controller
             $product->stock = $request->stock;
             $product->avatar = $request->avatar;
             if ($product->save()) {
-                session()->flash('success', $id ? 'Cập nhật thông tin sản phẩm thành công' : 'Thêm sản phẩm thành công');
+                session()->flash('success', $id ? 'Cập nhật thông tin hàng hóa thành công' : 'Thêm hàng hóa thành công');
                 return redirect()->route('product.index');
             }
         } catch (\Exception $e) {
@@ -74,7 +74,7 @@ class ProductsController extends Controller
             $product = Products::findOrFail($id);
             $product->delete();
             // Store a success message in the session
-            session()->flash('success', 'Xóa sản phẩm thành công');
+            session()->flash('success', 'Xóa hàng hóa thành công');
             return redirect()->route('product.index');
         } catch (\Exception $e) {
             // Store an error message in the session
