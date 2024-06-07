@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Import Order
     Route::get('/order-import/create/{id?}', [ImportOrderController::class, 'create'])->name('import.create')->middleware('admin');
+    Route::post('/order-import/store', [ImportOrderController::class, 'store'])->name('import.store')->middleware('admin');
 
 
    

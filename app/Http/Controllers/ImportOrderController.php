@@ -21,4 +21,9 @@ class ImportOrderController extends Controller
 
         return view('order.import.upsert', $data);
     }
+    public function store(Request $request){
+        dd($request);
+        // $order = new ImportOrder();
+
+    }
 }

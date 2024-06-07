@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <form class="cs-form" action="" method="post" style="max-width: 1050px" enctype="multipart/form-data">
+    <form class="cs-form" action="{{ route('import.store') }}" method="post" style="max-width: 1050px" enctype="multipart/form-data">
         @csrf
         <h3 class="form-title mb-4 text-center">
             Thêm mới đơn hàng nhập kho

@@ -62,10 +62,17 @@ class ProductsController extends Controller
             $product->avatar = $request->avatar;
             if ($product->save()) {
                 if ($request->ajax()) {
+                    $total = $product->purchase_price * $product->stock;
                     return response()->json([
                         'success' => true,
-                        'message' => $id ? 'Cập nhật thông tin hàng hóa thành công' : 'Thêm hàng hóa thành công',
-                        'product' => $product
+                        'message' => 'Thêm hàng hóa thành công',
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'avatar' => showImage($product->avatar), // Điều chỉnh đường dẫn ảnh
+                        'stock' => $product->stock, // Cộng thêm stock nếu có
+                        'purchase_price' => showPrice($product->purchase_price),
+                        'total_price_number' => $total,
+                        'total' => showPrice($total),
                     ]);
                 }
                 session()->flash('success', $id ? 'Cập nhật thông tin hàng hóa thành công' : 'Thêm hàng hóa thành công');
@@ -107,6 +114,7 @@ class ProductsController extends Controller
                 'avatar' => showImage($product->avatar), // Điều chỉnh đường dẫn ảnh
                 'stock' => $stock, // Cộng thêm stock nếu có
                 'purchase_price' => showPrice($product->purchase_price),
+                'total_price_number' => $total,
                 'total' => showPrice($total),
             ];
 
