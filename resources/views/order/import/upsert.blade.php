@@ -45,15 +45,15 @@
         <div class="row mb-5">
             <div class=" col-6">
                 <label for="nameuser" class="form-label">Ngày nhập <span class="required">*</span></label>
-                <input type="date" class="form-control" name="created_at" value=""
+                <input type="date" class="form-control" name="order_date" value=""
                     placeholder="Ngày nhập đơn hàng">
             </div>
             <div class=" col-6">
                 <label for="nameuser" class="form-label">Trạng thái đơn hàng <span class="required">*</span></label>
                 <select class="form-select" aria-label="Default select example" name="status">
                     <option value="">--Chọn trạng thái---</option>
-                    <option value="0">Đã thanh toán</option>
-                    <option value="1">Chưa thanh toán</option>
+                    <option value="1">Đã thanh toán</option>
+                    <option value="0">Chưa thanh toán</option>
                 </select>
             </div>
 

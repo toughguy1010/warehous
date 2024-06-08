@@ -13,6 +13,11 @@ use App\Models\Products;
 class ImportOrderController extends Controller
 {
     //
+    public function index(){
+        $orders = ImportOrder::paginate (5);
+        $data['orders'] = $orders;
+        return view('order.import.index',$data);
+    }
     public function create($id = null)
     {
 
@@ -30,11 +35,11 @@ class ImportOrderController extends Controller
         try {
             $totalPrices = $request->total_price;
             $amount = array_sum($totalPrices);
-            $orderNumber = 'WAREHOUSE_IMPORT_' . Str::random(10);
+            $orderNumber = 'WAREHOUSE_IMPORT_' . $this->generateNumericString(10);
             $order = ImportOrder::create([
                 'supplier_id' => $request->supplier_id,
                 'user_id' => $request->user_id,
-                'created_at' => $request->created_at,
+                'order_date' => $request->order_date,
                 'order_status' => $request->status,
                 'amount' => $amount,
                 'order_number' => $orderNumber, // Add the order number
@@ -77,5 +82,15 @@ class ImportOrderController extends Controller
             session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
             return back();
         }
+    }
+
+    private function generateNumericString($length)
+    {
+        $numbers = '0123456789';
+        $result = '';
+        for ($i = 0; $i < $length; $i++) {
+            $result .= $numbers[rand(0, strlen($numbers) - 1)];
+        }
+        return $result;
     }
 }

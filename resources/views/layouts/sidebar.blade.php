@@ -142,7 +142,7 @@
                     <a href="{{ route('import.create') }}" class="sub-menu-link">Tạo đơn nhập</a>
                 </li>
                 <li class="sub-menu-item">
-                    <a href="{{ route('product.index') }}" class="sub-menu-link">Danh sách đơn nhập</a>
+                    <a href="{{ route('import.index') }}" class="sub-menu-link">Danh sách đơn nhập</a>
                 </li>
             </ul>
             </a>
