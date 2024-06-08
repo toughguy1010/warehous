@@ -10,7 +10,7 @@
             @if (auth()->user()->isAdmin())
                 <div class=" col-6">
                     <label for="nameuser" class="form-label">Nhà cung cấp <span class="required">*</span></label>
-                    <select class="form-select" aria-label="Default select example" name="suppiler_id">
+                    <select class="form-select" aria-label="Default select example" name="supplier_id">
                         <option value="">--Chọn nhà cung cấp---</option>
                         @foreach ($suppilers as $suppiler)
                             <option value="{{ $suppiler->id }}"> {{ $suppiler->name }}</option>

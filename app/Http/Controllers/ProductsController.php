@@ -71,6 +71,7 @@ class ProductsController extends Controller
                         'avatar' => showImage($product->avatar), // Điều chỉnh đường dẫn ảnh
                         'stock' => $product->stock, // Cộng thêm stock nếu có
                         'purchase_price' => showPrice($product->purchase_price),
+                        'purchase_price_number' => $product->purchase_price, // Cộng thêm stock nếu có
                         'total_price_number' => $total,
                         'total' => showPrice($total),
                     ]);
@@ -113,6 +114,7 @@ class ProductsController extends Controller
                 'name' => $product->name,
                 'avatar' => showImage($product->avatar), // Điều chỉnh đường dẫn ảnh
                 'stock' => $stock, // Cộng thêm stock nếu có
+                'purchase_price_number' => $product->purchase_price, // Cộng thêm stock nếu có
                 'purchase_price' => showPrice($product->purchase_price),
                 'total_price_number' => $total,
                 'total' => showPrice($total),

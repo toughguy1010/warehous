@@ -143,16 +143,20 @@
                     var row = '<tr>';
                     row += '<td>' + response.id +
                         '<input type="hidden" name="product_ids[]" value="' + response.id +
-                        '"> </td>'; // ID sản phẩm
+                        '"> <input type="hidden" name="type[]" value="new_product"> </td>'; // ID sản phẩm
                     row += '<td>' + response.name + '</td>'; // Tên sản phẩm
                     row += '<td><img src="' + response.avatar +
                         '" alt="" class="product_img"></td>'; // Ảnh sản phẩm
-                    row += '<td>' + response.purchase_price + '</td>'; // Đơn giá mua
+                    row += '<td>' + response.purchase_price +
+                        '<input type="hidden" name="purchase_price_number[]" value="' + response
+                        .total_price_number +
+                        '"></td>'; // Đơn giá mua
                     row += '<td> ' + response.stock +
                         '<input type="hidden" name="quantity[]" value="' + response.stock +
                         '"></td>'; // Số lượng
                     row += '<td class="total-price">' + response.total +
-                        '<input type="hidden" name="total_price[]" value="' + response.total_price_number +
+                        '<input type="hidden" name="total_price[]" value="' + response
+                        .total_price_number +
                         '"></td>'; // Thành tiền
                     row +=
                         '<td><div class="btn btn-danger remove-product">Xóa</div></td>'; // Nút xóa hàng
