@@ -1,19 +1,19 @@
 @extends('layouts.app')
 @section('content')
-    <form class="cs-form" action="{{ route('import.store') }}" method="post" style="max-width: 1050px" enctype="multipart/form-data">
+    <form class="cs-form" action="{{ route('export.store') }}" method="post" style="max-width: 1050px" enctype="multipart/form-data">
         @csrf
         <h3 class="form-title mb-4 text-center">
-            Thêm mới đơn hàng nhập kho
+            Thêm mới đơn hàng xuất
         </h3>
         <p class="fw-bolder" style="color:#2c90fb; font-size: 18px">Chi tiết đơn hàng</p>
         <div class="row mb-3">
             @if (auth()->user()->isAdmin())
                 <div class=" col-6">
-                    <label for="nameuser" class="form-label">Nhà cung cấp <span class="required">*</span></label>
-                    <select class="form-select" aria-label="Default select example" name="supplier_id">
-                        <option value="">--Chọn nhà cung cấp---</option>
-                        @foreach ($suppilers as $suppiler)
-                            <option value="{{ $suppiler->id }}"> {{ $suppiler->name }}</option>
+                    <label for="nameuser" class="form-label">Khách hàng <span class="required">*</span></label>
+                    <select class="form-select" aria-label="Default select example" name="customer_id">
+                        <option value="">--Chọn khách hàng---</option>
+                        @foreach ($customers as $customer)
+                            <option value="{{ $customer->id }}"> {{ $customer->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -28,11 +28,11 @@
                 </div>
             @else
                 <div class=" col-6">
-                    <label for="nameuser" class="form-label">Nhà cung cấp <span class="required">*</span></label>
-                    <select class="form-select" aria-label="Default select example" name="supplier_id">
-                        <option value="">--Chọn nhà cung cấp---</option>
-                        @foreach ($suppilers as $suppiler)
-                            <option value="{{ $suppiler->id }}"> {{ $suppiler->name }}</option>
+                    <label for="nameuser" class="form-label">Khách hàng <span class="required">*</span></label>
+                    <select class="form-select" aria-label="Default select example" name="customer_id">
+                        <option value="">--Chọn Khách hàng---</option>
+                        @foreach ($customers as $customer)
+                            <option value="{{ $customer->id }}"> {{ $customer->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -59,9 +59,9 @@
 
         </div>
         <p class="fw-bolder" style="color:#2c90fb; font-size: 18px">Chi tiết hàng hóa
-            <span class="show-modal btn btn-outline-secondary btn-sm" data-url="{{ route('product.create') }}">
+            {{-- <span class="show-modal btn btn-outline-secondary btn-sm" data-url="{{ route('product.create') }}">
                 Thêm hàng hóa
-            </span>
+            </span> --}}
 
         </p>
 
@@ -82,7 +82,7 @@
             </div>
             <div class=" col-4">
                 <div class="select-product btn btn-outline-primary" style="margin-top: 30px;"
-                    data-url="{{ route('product.get-product', ['id' => '']) }}" > Chọn hàng hóa</div>
+                    data-url="{{ route('product.get-product', ['id' => '']) }}" data-type="export"> Chọn hàng hóa</div>
             </div>
         </div>
 

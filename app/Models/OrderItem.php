@@ -22,6 +22,10 @@ class OrderItem extends Model
     {
         return $this->belongsTo(ImportOrder::class, 'order_id'); // Explicitly define the foreign key
     }
+    public function exportOrder()
+    {
+        return $this->belongsTo(ExportOrder::class, 'order_id'); // Explicitly define the foreign key
+    }
     public function product(){
         return $this->belongsTo(Products::class, 'product_id'); // Explicitly define the foreign key
 

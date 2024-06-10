@@ -10,6 +10,7 @@ use App\Http\Services\UploadService;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImportOrderController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,9 +88,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order-import/index', [ImportOrderController::class, 'index'])->name('import.index')->middleware('admin');
     Route::get('/order-import/detail/{id?}', [ImportOrderController::class, 'detail'])->name('import.detail')->middleware('admin');
     Route::delete('/order-import/delete/{id?}', [ImportOrderController::class, 'delete'])->name('import.delete')->middleware('admin');
+    // Import Order
 
+    // Export Order
+    Route::get('/order-export/create', [ExportController::class, 'create'])->name('export.create')->middleware('admin');
+    Route::post('/order-export/store', [ExportController::class, 'store'])->name('export.store')->middleware('admin');
 
-   
+    // Export Order
+
     // Upload
     Route::post('upload/services', [UploadController::class, 'store'])->name('upload.services');
     // Upload

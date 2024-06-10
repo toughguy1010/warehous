@@ -46,6 +46,8 @@ $(".select-product").on("click", function () {
     var product_id = $("#product-arr").val(); // Lấy giá trị ID của sản phẩm được chọn
     var additional_stock = $("#stock").val(); // Lấy số lượng nhập thêm
     var url = $(this).data("url") + "/" + product_id; // Lấy URL từ data-url và thêm product_id
+    var type = $(this).data("type"); // Lấy số lượng nhập thêm
+
     if (!product_id) {
         alert("Vui lòng chọn hàng hóa");
         return false;
@@ -62,8 +64,13 @@ $(".select-product").on("click", function () {
             dataType: "json",
             data: {
                 stock: additional_stock,
+                type: type,
             },
             success: function (data) {
+                if(data.success == false){
+                    alert(data.message);
+                    return false;
+                }
                 if (data) {
                     // Tạo hàng trong bảng hiển thị danh sách hàng hóa
                     var row = "<tr>";

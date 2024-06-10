@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Supplier;
 use App\Models\OrderItem;
 use Carbon\Carbon;
-
-class ImportOrder extends Model
+use App\Models\Customer;
+class ExportOrder extends Model
 {
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'supplier_id',
+        'customer_id',
         'order_number',
         'order_status',
         'amount',
@@ -22,10 +21,6 @@ class ImportOrder extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class, 'order_id'); // Explicitly define the foreign key
-    }
-    public function supplier()
-    {
-        return $this->belongsTo(Supplier::class, 'supplier_id');
     }
     public function user()
     {
