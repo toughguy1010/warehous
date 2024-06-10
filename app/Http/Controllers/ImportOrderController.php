@@ -14,7 +14,7 @@ class ImportOrderController extends Controller
 {
     //
     public function index(){
-        $orders = ImportOrder::paginate (5);
+        $orders = ImportOrder::orderBy('order_date','desc')->paginate (5);
         $data['orders'] = $orders;
         return view('order.import.index',$data);
     }
@@ -35,7 +35,7 @@ class ImportOrderController extends Controller
         try {
             $totalPrices = $request->total_price;
             $amount = array_sum($totalPrices);
-            $orderNumber = 'WAREHOUSE_IMPORT_' . $this->generateNumericString(10);
+            $orderNumber = 'DON_NHAP_' . $this->generateNumericString(10);
             $order = ImportOrder::create([
                 'supplier_id' => $request->supplier_id,
                 'user_id' => $request->user_id,
@@ -75,8 +75,7 @@ class ImportOrderController extends Controller
             }
             $order->items()->saveMany($orderItems);
             session()->flash('success','Tạo đơn hàng nhập thành công');
-            // return redirect()->route('product.index');
-            return back();
+            return redirect()->route('import.index');
         } catch (\Exception $e) {
             dd($e);
             session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
@@ -92,5 +91,27 @@ class ImportOrderController extends Controller
             $result .= $numbers[rand(0, strlen($numbers) - 1)];
         }
         return $result;
+    }
+    public function detail( $id){
+        $order = ImportOrder::findOrFail($id);
+        $data['order'] = $order;
+        return view('order.import.detail',$data);
+    }
+    public function delete( $id)
+    {
+        try {
+            // Find the order by its ID along with its associated order items
+            $order = ImportOrder::with('items')->findOrFail($id);
+            
+            // Delete the order items
+            $order->items()->delete();
+            
+            // Delete the order
+            $order->delete();
+            
+            return redirect()->route('import.index')->with('success', 'Xóa đơn hàng thành công.');
+        } catch (\Exception $e) {
+            return redirect()->route('import.index')->with('error', 'Có lỗi trong xử lí đơn hàng: ' . $e->getMessage());
+        }
     }
 }

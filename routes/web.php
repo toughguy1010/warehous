@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/product/upsert/store/{id?}', [ProductsController::class, 'upsertStore'])->name('product.upsert.store')->middleware('admin');
     Route::delete('/product/upsert/delete/{id}', [ProductsController::class, 'delete'])->name('product.delete')->middleware('admin');
     Route::get('/get-product-detail/{id?}', [ProductsController::class, 'getProductDetail'])->name('product.get-product')->middleware('admin');
+    
     // Product
 
     // User
@@ -71,12 +72,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/update/{id?}', [UserController::class, 'upsert'])->name('user.update')->middleware('admin');
     Route::post('/user/upsert/store/{id?}', [UserController::class, 'upsertStore'])->name('user.upsert.store')->middleware('admin');
     Route::delete('/user/upsert/delete/{id}', [UserController::class, 'delete'])->name('user.delete')->middleware('admin');
+
+    Route::get('/user/update-profile/{id?}', [UserController::class, 'upsert'])->name('user.update-profile');
+    Route::post('/user/update-profile/store/{id?}', [UserController::class, 'updateProfile'])->name('user.update-profile.store');
+    Route::get('/change-password', [UserController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/change-password', [UserController::class, 'changePassword'])->name('password.change.store');
+
+
     // User
 
     // Import Order
     Route::get('/order-import/create/{id?}', [ImportOrderController::class, 'create'])->name('import.create')->middleware('admin');
     Route::post('/order-import/store', [ImportOrderController::class, 'store'])->name('import.store')->middleware('admin');
     Route::get('/order-import/index', [ImportOrderController::class, 'index'])->name('import.index')->middleware('admin');
+    Route::get('/order-import/detail/{id?}', [ImportOrderController::class, 'detail'])->name('import.detail')->middleware('admin');
+    Route::delete('/order-import/delete/{id?}', [ImportOrderController::class, 'delete'])->name('import.delete')->middleware('admin');
 
 
    

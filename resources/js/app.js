@@ -82,7 +82,7 @@ $(".select-product").on("click", function () {
                         "<td>" +
                         data.purchase_price +
                         ' <input type="hidden" name="purchase_price_number[]" value="' +
-                        data.total_price_number +
+                        data.purchase_price_number +
                         '"> </td>'; // Đơn giá mua
                     row +=
                         "<td> " +

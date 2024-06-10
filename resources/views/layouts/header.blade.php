@@ -3,12 +3,12 @@
         <div class="user-wrap">
             @if (auth()->user())
                 <div class="user-div">
-                    <img src="{{ showImage('') }}" alt="">
+                    <img src="{{ showImage(auth()->user()->avatar) }}" alt="">
                     <ul class="menu-dropdown">
                         <h5>Xin chào {{ auth()->user()->name }}</h5>
                         <div class="profile_info_details">
                             <li class="menu-dropdown-item">
-                                <a href="#" class="menu-dropdown-link">Thông tin cá nhân
+                                <a href={{ route('user.update-profile',auth()->user()->id ) }} class="menu-dropdown-link">Thông tin cá nhân
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                         <path
@@ -17,7 +17,7 @@
                                 </a>
                             </li>
                             <li class="menu-dropdown-item">
-                                <a href="#" class="menu-dropdown-link">
+                                <a href="{{ route('password.change') }}" class="menu-dropdown-link">
                                     Đặt lại mật khẩu
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->

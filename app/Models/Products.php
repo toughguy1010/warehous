@@ -25,4 +25,13 @@ class Products extends Model
     {
         return $this->belongsTo(Unit::class, 'unit_id');
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($product) {
+            // Update the product_id of associated order items to null
+            OrderItem::where('product_id', $product->id)->update(['product_id' => null]);
+        });
+    }
 }

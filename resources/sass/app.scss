@@ -61,7 +61,7 @@ body {
 }
 #side_bar {
     flex: 0 0 280px;
-    height: 100vh;
+    min-height: 100vh;
     background-color: transparent;
     border-right: 5px solid #818ab2;
 }
@@ -321,4 +321,13 @@ body {
 .modal-dialog{
     width: 800px !important;
     max-width: 800px !important;
+}
+.return-btn{
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+}
+.cs-table-2{
+    border-collapse: separate;
+    border-spacing: 10px;
 }

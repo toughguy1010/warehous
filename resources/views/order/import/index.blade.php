@@ -22,19 +22,21 @@
                         {{ $key + 1 }}
                     </td>
                     <td>{{ $order->order_number }}</td>
-                    <td>{{showPrice($order->amount)  }}</td>
-                    <td>{{  $order->getDate()  }}</td>
-                    <td>{{ $order->getStatus() }}</td>
+                    <td>{{ showPrice($order->amount) }}</td>
+                    <td>{{ $order->getDate() }}</td>
+                    <td>
+                        {{ $order->getStatus() }}
+                    </td>
                     <td>
                         <div class="d-flex justify-content-center" style="gap: 10px">
-                            {{-- <a href="{{ route('product.update', $product->id) }}" class="btn btn-primary"> Sửa </a>
-                            <form action="{{ route('product.delete', $product->id) }}" method="POST"
+                            <a href="{{ route('import.detail', $order->id) }}" class="btn btn-primary"> Chi tiết </a>
+                            <form action="{{ route('import.delete', $order->id) }}" method="POST"
                                 style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Bạn có muốn xóa hàng hóa này không?');">Xóa</button>
-                            </form> --}}
+                                    onclick="return confirm('Bạn có muốn xóa đơn hàng này không?');">Xóa</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <form class="cs-form" action="{{ route('user.upsert.store', ['id' => isset($user) ? $user->id : null]) }}" method="post"
+@php
+    
+use Illuminate\Support\Facades\Route;
+
+@endphp
+    <form class="cs-form" action="{{ Route::currentRouteName() == 'user.update-profile' ? route('user.update-profile.store',['id' => isset($user) ? $user->id : null]) : route('user.upsert.store', ['id' => isset($user) ? $user->id : null]) }}" method="post"
         style="max-width: 950px" enctype="multipart/form-data">
         @csrf
         <h3 class="form-title mb-4 text-center">

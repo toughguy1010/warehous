@@ -149,7 +149,7 @@
                         '" alt="" class="product_img"></td>'; // Ảnh sản phẩm
                     row += '<td>' + response.purchase_price +
                         '<input type="hidden" name="purchase_price_number[]" value="' + response
-                        .total_price_number +
+                        .purchase_price_number +
                         '"></td>'; // Đơn giá mua
                     row += '<td> ' + response.stock +
                         '<input type="hidden" name="quantity[]" value="' + response.stock +
