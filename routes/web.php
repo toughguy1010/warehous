@@ -93,6 +93,9 @@ Route::middleware(['auth'])->group(function () {
     // Export Order
     Route::get('/order-export/create', [ExportController::class, 'create'])->name('export.create')->middleware('admin');
     Route::post('/order-export/store', [ExportController::class, 'store'])->name('export.store')->middleware('admin');
+    Route::get('/order-export/index', [ExportController::class, 'index'])->name('export.index')->middleware('admin');
+    Route::get('/order-export/detail/{id?}', [ExportController::class, 'detail'])->name('export.detail')->middleware('admin');
+    Route::delete('/order-export/delete/{id?}', [ExportController::class, 'delete'])->name('export.delete')->middleware('admin');
 
     // Export Order
 

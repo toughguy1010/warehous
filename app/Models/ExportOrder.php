@@ -26,6 +26,10 @@ class ExportOrder extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
     public function getStatus()
     {
         return $this->order_status == 1 ? 'Đã thanh toán' : 'Chưa thanh toán';

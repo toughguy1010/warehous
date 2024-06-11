@@ -12,6 +12,11 @@ use App\Models\ExportOrder;
 class ExportController extends Controller
 {
     //
+    public function index(){
+        $orders = ExportOrder::orderBy('order_date','desc')->paginate (5);
+        $data['orders'] = $orders;
+        return view('order.export.index',$data);
+    }
 
     public function create()
     {
@@ -26,7 +31,11 @@ class ExportController extends Controller
         return view('order.export.upsert', $data);
     }
 
-
+    public function detail( $id){
+        $order = ExportOrder::findOrFail($id);
+        $data['order'] = $order;
+        return view('order.export.detail',$data);
+    }
 
     public function store(Request $request)
     {
@@ -73,7 +82,7 @@ class ExportController extends Controller
             }
             $order->items()->saveMany($orderItems);
             session()->flash('success','Tạo đơn hàng xuất thành công');
-            return redirect()->route('import.index');
+            return redirect()->route('export.index');
         } catch (\Exception $e) {
             dd($e);
             session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
@@ -89,5 +98,23 @@ class ExportController extends Controller
             $result .= $numbers[rand(0, strlen($numbers) - 1)];
         }
         return $result;
+    }
+
+    public function delete( $id)
+    {
+        try {
+            // Find the order by its ID along with its associated order items
+            $order = ExportOrder::with('items')->findOrFail($id);
+            
+            // Delete the order items
+            $order->items()->delete();
+            
+            // Delete the order
+            $order->delete();
+            
+            return redirect()->route('export.index')->with('success', 'Xóa đơn hàng thành công.');
+        } catch (\Exception $e) {
+            return redirect()->route('export.index')->with('error', 'Có lỗi trong xử lí đơn hàng: ' . $e->getMessage());
+        }
     }
 }
