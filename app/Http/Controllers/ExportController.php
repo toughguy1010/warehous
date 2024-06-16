@@ -40,7 +40,7 @@ class ExportController extends Controller
     public function store(Request $request)
     {
         try {
-            $totalPrices = $request->total_price;
+            $totalPrices = $request->total_price_number_export;
             $amount = array_sum($totalPrices);
             $orderNumber = 'DON_XUAT_' . $this->generateNumericString(10);
             $order = ExportOrder::create([
@@ -54,7 +54,7 @@ class ExportController extends Controller
             $productIds = $request->product_ids;
             $types = $request->type;
             $quantities = $request->quantity;
-            $singlePrices = $request->purchase_price_number;
+            $singlePrices = $request->selling_price_number;
             $orderItems = [];
 
             foreach ($productIds as $index => $productId) {
@@ -117,4 +117,17 @@ class ExportController extends Controller
             return redirect()->route('export.index')->with('error', 'Có lỗi trong xử lí đơn hàng: ' . $e->getMessage());
         }
     }
+
+    public function changeStatus(Request $request, $id)
+{
+    // Find the order by ID
+    $order = ExportOrder::findOrFail($id);
+
+    // Update the order status
+    $order->order_status = $request->input('order_status');
+    $order->save();
+
+    // Redirect back with a success message
+    return redirect()->back()->with('success', 'Order status updated successfully!');
+}
 }

@@ -81,7 +81,7 @@
                     placeholder="Nhập số lượng hàng hóa" id="stock">
             </div>
             <div class=" col-4">
-                <div class="select-product btn btn-outline-primary" style="margin-top: 30px;"
+                <div class="select-product-export btn btn-outline-primary" style="margin-top: 30px;"
                     data-url="{{ route('product.get-product', ['id' => '']) }}" data-type="export"> Chọn hàng hóa</div>
             </div>
         </div>
@@ -95,7 +95,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Sản phẩm</th>
                     <th scope="col">Ảnh</th>
-                    <th scope="col">Đơn giá mua</th>
+                    <th scope="col">Đơn giá bán</th>
                     <th scope="col">Số lượng</th>
                     <th scope="col">Thành tiền</th>
                     <th scope="col">Hành động</th>

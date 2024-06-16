@@ -117,6 +117,7 @@ class ProductsController extends Controller
            
             $stock =  $additional_stock;
             $total = $product->purchase_price * $stock;
+            $total_export = $product->selling_price * $stock;
             $response = [
                 'id' => $product->id,
                 'name' => $product->name,
@@ -124,8 +125,12 @@ class ProductsController extends Controller
                 'stock' => $stock, // Cộng thêm stock nếu có
                 'purchase_price_number' => $product->purchase_price, // Cộng thêm stock nếu có
                 'purchase_price' => showPrice($product->purchase_price),
+                'selling_price_number' => $product->selling_price, // Cộng thêm stock nếu có
+                'selling_price' => showPrice($product->selling_price),
                 'total_price_number' => $total,
                 'total' => showPrice($total),
+                'total_export' => showPrice($total_export),
+                'total_price_number_export' => $total_export,
             ];
 
             return response()->json($response);

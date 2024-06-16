@@ -25,7 +25,15 @@
                     <td>{{ showPrice($order->amount) }}</td>
                     <td>{{ $order->getDate() }}</td>
                     <td>
-                        {{ $order->getStatus() }}
+                        <form action="{{ route('export.change-status', $order->id) }}"  method="POST">
+                            @csrf
+                            <select name="order_status" id="order_status" onchange="this.form.submit()">
+                                <option value="0" {{ $order->order_status == 0 ? 'selected' : '' }}>Chưa thanh toán</option>
+                                <option value="1" {{ $order->order_status == 1 ? 'selected' : '' }}>Đã thanh toán</option>
+                                <!-- Add more status options as needed -->
+                            </select>
+                        </form>
+                        {{-- {{ $order->getStatus() }} --}}
                     </td>
                     <td>
                         <div class="d-flex justify-content-center" style="gap: 10px">
