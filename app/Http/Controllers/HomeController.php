@@ -32,6 +32,12 @@ class HomeController extends Controller
         $total_import = ImportOrder::count();
         $total_export = ExportOrder::count();
 
+        // Get total stock quantity
+        $totalStock = Products::sum('stock');
+
+        // Get each product's stock quantity
+        $products = Products::select('*')->get();
+
         $filter = $request->input('filter', 'month'); // default filter is month
         $date = Carbon::now();
         switch ($filter) {
@@ -53,7 +59,7 @@ class HomeController extends Controller
             $startDate = $date->setMonth($filter)->startOfMonth()->format('Y-m-d');
             $endDate = $date->setMonth($filter)->endOfMonth()->format('Y-m-d');
         }
-       
+
 
         // Get revenue for ImportOrders within the specified date range
         $importRevenue = ImportOrder::selectRaw('DATE(order_date) as date, SUM(amount) as total')
@@ -81,7 +87,9 @@ class HomeController extends Controller
             'totalImportRevenue' => $totalImportRevenue,
             'totalExportRevenue' => $totalExportRevenue,
             'filter' => $filter,
-            'date' => $date 
+            'date' => $date,
+            'totalStock' => $totalStock,
+            'products' => $products,
         ];
 
         return view('home', $data);

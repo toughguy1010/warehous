@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-start cs-dashboard my-5">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card">
                 <div class="card-header text-center">Tổng hàng hóa</div>
                 <a class="card-body" href="{{ route('product.index') }}" target="_blank">
@@ -10,7 +10,15 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header text-center">Sản phẩm tồn kho</div>
+                <div class="card-body show-stock" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    {{ $totalStock }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
             <div class="card">
                 <div class="card-header text-center">Tổng đơn nhập</div>
                 <a class="card-body" href="{{ route('import.index') }}" target="_blank">
@@ -19,7 +27,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card">
                 <div class="card-header text-center">Tổng đơn xuất</div>
                 <a class="card-body" href="{{ route('export.index') }}" target="_blank">
@@ -36,7 +44,7 @@
                     <label for="filter " class="mb-2">Thống kê theo tháng :</label>
                     <select class="form-select  " name="filter" id="filter" onchange="this.form.submit()">
                         <option value="" {{ $filter == 'year' ? 'selected' : '' }}>---Chọn tháng---</option>
-                     
+
                         @php
                             $months = [
                                 1 => 'Tháng một',
@@ -55,7 +63,7 @@
                         @endphp
                         @for ($i = 1; $i <= 12; $i++)
                             @php
-                                $month = sprintf('%02d', $i); 
+                                $month = sprintf('%02d', $i);
                                 $selected = $i == $date->month ? 'selected' : '';
 
                             @endphp
@@ -78,10 +86,11 @@
             <p class="text-center my-4">Bảng thống kê doanh thu đơn nhập theo tháng</p>
         </div>
         <div class="col-md-4">
-            <p  class=" my-4" >Tổng doanh thu: {{ showPrice($totalImportRevenue) }}</p>
+            <p class=" my-4">Tổng doanh thu: {{ showPrice($totalImportRevenue) }}</p>
             <ul class="ps-0">
                 @foreach ($importRevenue as $revenue)
-                <li style="list-style-type: none" class="mt-2">{{ $revenue->date }}: {{ showPrice($revenue->total) }}</li>
+                    <li style="list-style-type: none" class="mt-2">{{ $revenue->date }}:
+                        {{ showPrice($revenue->total) }}</li>
                 @endforeach
             </ul>
         </div>
@@ -96,14 +105,13 @@
             <p class=" my-4">Tổng doanh thu: {{ showPrice($totalExportRevenue) }}</p>
             <ul class="ps-0">
                 @foreach ($exportRevenue as $revenue)
-                    <li style="list-style-type: none" class="mt-2">{{ $revenue->date }}: {{ showPrice($revenue->total) }}</li>
+                    <li style="list-style-type: none" class="mt-2">{{ $revenue->date }}:
+                        {{ showPrice($revenue->total) }}</li>
                 @endforeach
             </ul>
         </div>
 
     </div>
-    @php
-
-    @endphp
+   @include('home-model')
     @include('home-script')
 @endsection

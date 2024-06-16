@@ -163,6 +163,7 @@ body {
     text-align: right;
     padding: 30px 30px 20px;
     opacity: 0;
+    z-index: 99999999999999;
     visibility: hidden;
     transition: all .5s;
     h5 {

@@ -6,7 +6,7 @@
     </div>
     <ul class="menu-list">
       
-        @if (auth()->check() && auth()->user()->isAdmin() !== null)
+        @if (auth()->check() && auth()->user()->isAdmin())
             <li class="menu-item has-child">
                 <a href="#" class="menu-link">
                     <svg xmlns="http://www.w3.org/2000/svg"
