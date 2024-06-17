@@ -4,24 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+
 class CustomerController extends Controller
 {
     //
-    public function index(){
-        $customers = Customer::paginate(5);
+    public function index(Request $request)
+    {
+        $search = $request->query('search');
+        $customers = Customer::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->paginate(5)
+            ->appends(['search' => $search]);
         $data['customers'] = $customers;
+        $data['search'] = $search;
         return view('customer.index', $data);
     }
-    public function upsert($id = null){
-        if($id !== null){
+    public function upsert($id = null)
+    {
+        if ($id !== null) {
             $customer = Customer::findOrFail($id);
-        }else{
+        } else {
             $customer = null;
         }
         $data['customer'] = $customer;
         return view('customer.upsert', $data);
     }
-    public function upsertStore(Request $request, $id = null){
+    public function upsertStore(Request $request, $id = null)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
@@ -41,7 +52,7 @@ class CustomerController extends Controller
             }
         } catch (\Exception $e) {
             dd($e);
-                        session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
+            session()->flash('error', 'Có lỗi trong quá trình xử lí thông tin');
             return back();
         }
     }
@@ -60,5 +71,4 @@ class CustomerController extends Controller
             return redirect()->route('customer.index');
         }
     }
-
 }

@@ -355,3 +355,25 @@ body {
     gap: 40px;
     // justify-content: flex-end;
 }
+.header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.search-box{
+    display: flex;
+    align-items: center;
+}
+.search-box button svg{
+    width: 16px;
+    fill: #fff;
+
+}
+.search-box button{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.search-box input{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}

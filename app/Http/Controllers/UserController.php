@@ -6,14 +6,25 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     //
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('created_at', 'desc')->paginate(5);
+        $search = $request->query('search');
+
+        $users = User::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5)
+            ->appends(['search' => $search]);
         $data['users'] = $users;
+        $data['search'] = $search;
+
         return view('user.index', $data);
     }
     public function upsert($id = null)

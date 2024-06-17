@@ -86,6 +86,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order-import/index', [ImportOrderController::class, 'index'])->name('import.index');
     Route::get('/order-import/detail/{id?}', [ImportOrderController::class, 'detail'])->name('import.detail');
     Route::delete('/order-import/delete/{id?}', [ImportOrderController::class, 'delete'])->name('import.delete');
+    Route::post('/order-import/change-status/{id?}', [ImportOrderController::class, 'changeStatus'])->name('import.change-status');
+
     // Import Order
 
     // Export Order

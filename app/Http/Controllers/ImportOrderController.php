@@ -13,9 +13,17 @@ use App\Models\Products;
 class ImportOrderController extends Controller
 {
     //
-    public function index(){
-        $orders = ImportOrder::orderBy('order_date','desc')->paginate (5);
+    public function index(Request $request){
+        $search = $request->query('search');
+        $orders = ImportOrder::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('order_number', 'like', '%' . $search . '%');
+            })
+            ->orderBy('order_date', 'desc')
+            ->paginate(5)
+            ->appends(['search' => $search]);
         $data['orders'] = $orders;
+        $data['search'] = $search;
         return view('order.import.index',$data);
     }
     public function create($id = null)
@@ -113,5 +121,19 @@ class ImportOrderController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('import.index')->with('error', 'Có lỗi trong xử lí đơn hàng: ' . $e->getMessage());
         }
+    }
+
+
+    public function changeStatus(Request $request, $id)
+    {
+        // Find the order by ID
+        $order = ImportOrder::findOrFail($id);
+
+        // Update the order status
+        $order->order_status = $request->input('order_status');
+        $order->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Thay đổi trạng thái đơn hàng thành công!');
     }
 }

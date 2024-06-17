@@ -12,10 +12,18 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Products::orderBy('created_at', 'desc')->paginate(5);
+        $search = $request->query('search');
+        $products = Products::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5)
+            ->appends(['search' => $search]);
         $data['products'] = $products;
+        $data['search'] = $search;
         return view('product.index', $data);
     }
     public function upsert(Request $request, $id = null)
@@ -107,14 +115,13 @@ class ProductsController extends Controller
         if ($product) {
             // Kiểm tra xem có truyền thêm 'stock' không
             $additional_stock = $request->input('stock', 0);
-            if($request->type == 'export' && $additional_stock > $product->stock){
+            if ($request->type == 'export' && $additional_stock > $product->stock) {
                 return response()->json([
                     'message' => 'Số lượng sản phẩm không đủ so với số lượng đã nhập',
                     'success' => false,
                 ]);
-
             }
-           
+
             $stock =  $additional_stock;
             $total = $product->purchase_price * $stock;
             $total_export = $product->selling_price * $stock;
