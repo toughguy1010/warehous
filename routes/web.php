@@ -87,6 +87,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order-import/detail/{id?}', [ImportOrderController::class, 'detail'])->name('import.detail');
     Route::delete('/order-import/delete/{id?}', [ImportOrderController::class, 'delete'])->name('import.delete');
     Route::post('/order-import/change-status/{id?}', [ImportOrderController::class, 'changeStatus'])->name('import.change-status');
+    Route::get('/order-import/{id}/pdf', [ImportOrderController::class, 'exportPDF'])->name('import.pdf');
 
     // Import Order
 
@@ -97,6 +98,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order-export/detail/{id?}', [ExportController::class, 'detail'])->name('export.detail');
     Route::delete('/order-export/delete/{id?}', [ExportController::class, 'delete'])->name('export.delete');
     Route::post('/order-export/change-status/{id?}', [ExportController::class, 'changeStatus'])->name('export.change-status');
+    Route::get('/order-export/{id}/pdf', [ExportController::class, 'exportPDF'])->name('export.pdf');
 
     // Export Order
     // Roles

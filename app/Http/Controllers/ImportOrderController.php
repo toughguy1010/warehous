@@ -7,7 +7,9 @@ use App\Models\ImportOrder;
 use App\Models\OrderItem;
 use App\Models\Supplier;
 use App\Models\User;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str;use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\Response;
 use App\Models\Products;
 
 class ImportOrderController extends Controller
@@ -37,6 +39,37 @@ class ImportOrderController extends Controller
         $data['products'] = $products;
 
         return view('order.import.upsert', $data);
+    }
+    public function exportPDF($id)
+    {
+        $order = ImportOrder::findOrFail($id);
+    
+        $pdf = new Dompdf();
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('defaultFont', 'DejaVu Sans'); // Sử dụng font DejaVu Sans
+        $options->set('isPhpEnabled', true); // Cho phép mã PHP trong blade template
+        $pdf->setOptions($options);
+    
+        // Load HTML từ view Blade
+        $html = view('order.import.pdf', compact('order'))->render();
+        // Load HTML vào Dompdf
+        $pdf->loadHtml($html);
+    
+        // Thiết lập kích thước giấy và hướng (tùy chọn)
+        $pdf->setPaper('A4', 'portrait');
+    
+        // Render PDF
+        $pdf->render();
+    
+        // Lấy nội dung PDF
+        $output = $pdf->output();
+    
+        // Trả về response để tải xuống
+        return Response::make($output, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename=order_' . $order->id . '.pdf',
+        ]);
     }
     public function store(Request $request)
     {

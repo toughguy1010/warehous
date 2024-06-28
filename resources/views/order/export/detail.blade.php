@@ -1,8 +1,12 @@
 @extends('layouts.app')
 @section('content')
-    <h4 style="text-decoration: underline">
-        Thông tin đơn hàng
-    </h4>
+    <div class="detail-header d-flex align-items-baseline" style="gap: 20px">
+        <h4 style="text-decoration: underline">
+            Thông tin đơn hàng
+        </h4>
+        <a href="{{ route('export.pdf',$order->id) }}" class="btn btn-outline-primary">Xuất PDF</a>
+    </div>
+
     <div class="row my-3">
         <div class="col-4">
             <table class=" cs-table-2" style="width: 100%">
@@ -95,16 +99,15 @@
                         </td>
                     </tr>
                 @else
-                <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>Sản phẩm này đã bị xóa hoặc không tồn tại</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                    <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>Sản phẩm này đã bị xóa hoặc không tồn tại</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 @endif
-
             @endforeach
         </tbody>
     </table>
