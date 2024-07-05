@@ -106,7 +106,7 @@
         </table>
 
 
-        <button class="btn btn-primary right-btn">Tạo đơn nhập hàng hóa</button>
+        <button class="btn btn-primary right-btn submit-order">Tạo đơn xuất hàng hóa</button>
     </form>
 
 @endsection

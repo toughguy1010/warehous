@@ -1,5 +1,5 @@
 import "./bootstrap";
-import $ from "jquery";
+import $, { event } from "jquery";
 
 $(document).ready(function () {
     $(".menu-link").click(function (e) {
@@ -196,3 +196,11 @@ $(".show-modal").on("click", function () {
         },
     });
 });
+
+$(".submit-order").on("click",function(event){
+    var itemOrders = $('.item-product-order');
+    if(itemOrders.children().length === 0){
+        alert('Vui lòng nhập ít nhất một hàng hóa và0 đơn hàng')
+        event.preventDefault();
+    }
+})
