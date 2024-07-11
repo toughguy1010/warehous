@@ -184,6 +184,10 @@ $(".select-product-export").on("click", function () {
         });
     }
 });
+
+$(document).on("click", ".remove-product", function () {
+    $(this).closest("tr").remove();
+});
 // get modal
 $(".show-modal").on("click", function () {
     var url = $(this).data("url");
